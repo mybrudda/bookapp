@@ -37,4 +37,37 @@ router.post("/", protectRoute ,async (req, res) => {
   }
 });
 
+
+// pagination => infinte loading/scrolling
+
+router.get("/", protectRoute, async (req, res) => {
+  try {
+    const page = req.query.page || 1 // default page will be 1
+    const limit = req.query.limit || 10 // default limit will be 10
+    const skip = (page -1) * limit
+
+    const books = await Book.find()
+    .sort({created: -1}) // descending
+    .skip(skip)
+    .limit(limit)
+    .populate("user", "username profileImage")
+
+    const total = await Book.countDocuments()
+
+    res.send({
+      books,
+      currentPage: page,
+      totalBooks: total,
+      totalPages: Math.ceil(total/limit)
+    })
+
+  } catch (error) {
+
+    console.log("Error in get all books route", error)
+    res.status(500).json({message: "Internal server error: Could not get all books"})
+
+  }
+})
+
+
 export default router;
