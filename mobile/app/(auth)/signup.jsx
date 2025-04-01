@@ -8,21 +8,29 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "../../assets/styles/signup.styles";
 import COLORS from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useAuthStore } from "../../store/authStore";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  
+  const { user, isLoading, register } = useAuthStore()
 
-  const handleSignUp = () => {};
+  const handleSignUp = async () => {
+
+    const result = await register(username, email, password)
+
+    if(!result.success) Alert.alert("Error", result.error)
+  };
 
   return (
     <KeyboardAvoidingView
@@ -32,7 +40,7 @@ export default function Signup() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.card}>
-            
+
             <View style={styles.header}>
               <Text style={styles.title}>BookApp</Text>
               <Text style={styles.subtitle}>Share your favorite reads</Text>
