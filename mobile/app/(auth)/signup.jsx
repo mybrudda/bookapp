@@ -29,7 +29,13 @@ export default function Signup() {
 
     const result = await register(username, email, password)
 
-    if(!result.success) Alert.alert("Error", result.error)
+    if(!result.success){
+      Alert.alert("Error", result.error)
+    } else{
+      Alert.alert("User created successfully!")
+    }
+    
+    
   };
 
   return (
