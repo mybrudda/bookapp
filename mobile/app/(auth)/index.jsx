@@ -15,14 +15,20 @@ import { Image } from "expo-image";
 import COLORS from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import {useAuthStore} from "../../store/authStore"
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const {isLoading, login} = useAuthStore()
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    const result = await login(email, password)
+
+    if(!result.success) Alert.alert("Error", result.message)
+
+  };
 
   return (
     <KeyboardAvoidingView
