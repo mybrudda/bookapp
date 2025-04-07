@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     padding: 16,
-    paddingBottom: 80, 
+    paddingBottom: 80,
   },
   header: {
     marginBottom: 20,
@@ -121,6 +121,26 @@ const styles = StyleSheet.create({
   },
   footerLoader: {
     marginVertical: 20,
+  },
+  inputField: {
+    width: 400,
+    maxWidth: "90%",
+    height: 50,
+    borderRadius: 12,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    borderWidth: 1,
+    marginBottom: 10,
+    marginHorizontal: 10,
+    alignSelf: "center",
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.border,
+    color: COLORS.textPrimary,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
   },
 });
 

@@ -44,7 +44,7 @@ router.get("/", protectRoute, async (req, res) => {
     const skip = (page - 1) * limit;
 
     const books = await Book.find()
-      .sort({ created: -1 }) // descending
+      .sort({ createdAt: -1 }) // descending
       .skip(skip)
       .limit(limit)
       .populate("user", "username profileImage");
@@ -105,6 +105,31 @@ router.delete("/:id", protectRoute, async (req, res) => {
     res.json({ message: "Book deleted successfully" });
   } catch (error) {
     console.log("Error deleting book", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.get("/title", protectRoute, async (req, res) => {
+  try {
+    const { title } = req.query;
+
+    if (!title) {
+      return res.status(400).json({ message: "Please provide a title" });
+    }
+
+    const books = await Book.find({ title: new RegExp(title, "i") })
+      .sort({ createdAt: -1 })
+      .populate("user", "username profileImage");
+
+    if (books.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No books found with that title" });
+    }
+
+    res.json(books);
+  } catch (error) {
+    console.log("Error fetching books by title", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
