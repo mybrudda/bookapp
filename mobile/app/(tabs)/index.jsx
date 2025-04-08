@@ -157,22 +157,32 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.inputField}
-        placeholder="Type here..."
-        placeholderTextColor="#aaa"
-        value={inputValue}
-        onChangeText={setInputValue}
-        onSubmitEditing={() => fetchBooksByTitle(inputValue)}
-        returnKeyType="search"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
+      <View style={styles.inputContainer}>
+        <Ionicons
+          name="search"
+          size={20}
+          color={COLORS.textSecondary}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          style={styles.inputField}
+          placeholder="Search books..."
+          placeholderTextColor={COLORS.textSecondary}
+          value={inputValue}
+          onChangeText={setInputValue}
+          onSubmitEditing={() => fetchBooksByTitle(inputValue)}
+          returnKeyType="search"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+
+      
 
       <FlatList
         data={books}
         renderItem={renderItem}
-        keyExtractor={(item) => item._id} 
+        keyExtractor={(item) => item._id}
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
         refreshControl={
