@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
     color: COLORS.textPrimary,
+    fontFamily: "JetBrainsMono-Medium",
   },
   bookImageContainer: {
     width: "100%",

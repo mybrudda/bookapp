@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: COLORS.textPrimary,
     marginBottom: 4,
+    fontFamily: "JetBrainsMono-Medium",
   },
   email: {
     fontSize: 14,

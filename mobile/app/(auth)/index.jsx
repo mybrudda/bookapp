@@ -21,7 +21,7 @@ export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const {isLoading, login} = useAuthStore()
+  const {isLoading, login, user, token} = useAuthStore()
 
   const handleLogin = async () => {
     const result = await login(email, password)
@@ -29,6 +29,12 @@ export default function LoginScreen() {
     if(!result.success) Alert.alert("Error", result.message)
 
   };
+
+  // if user logged in we return null so we dont see this screen
+  if (user && token) {
+    return null
+  }
+  
 
   return (
     <KeyboardAvoidingView
