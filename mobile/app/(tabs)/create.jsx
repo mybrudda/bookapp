@@ -21,6 +21,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system"
 import { useAuthStore } from "../../store/authStore";
 import {API_URL} from "../../constants/api"
+import * as ImageManipulator from 'expo-image-manipulator';
 
 export default function Create() {
   const [title, setTitle] = useState("");
@@ -33,40 +34,51 @@ export default function Create() {
   const {token} = useAuthStore()
 
   
-
   const pickImage = async () => {
     try {
+      
+      if (Platform.OS !== "web") {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          Alert.alert("Permission Denied", "We need camera roll permissions to upload an image");
+          return;
+        }
+      }
+  
+     
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: "images",
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.5,
+        quality: 0.5, 
         base64: true,
       });
-
+  
       if (!result.canceled) {
-        setImage(result.assets[0].uri);
-        //if base64 is provided, use it
-        if (result.assets[0].base64) {
-          setImageBase64(result.assets[0].base64);
-        } else {
-          // Converting to base64 when its not provided
-          const base64 = await FileSystem.readAsStringAsync(
-            result.assets[0].uri,
-            {
-              encoding: FileSystem.EncodingType.Base64,
-            }
-          );
-          setImageBase64(base64);
-        }
-      } else {
-        console.log("Image picker was canceled");
+        const imageUri = result.assets[0].uri;
+  
+        // Resize image to reduce base64 size
+        const resizedImage = await ImageManipulator.manipulateAsync(
+          imageUri,
+          [{ resize: { width: 300 } }], 
+          { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG } 
+        );
+  
+        setImage(resizedImage.uri);
+        
+        const base64 = await FileSystem.readAsStringAsync(resizedImage.uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+  
+        setImageBase64(base64); 
       }
     } catch (error) {
-      console.error("Error picking image: ", error);
-      Alert.alert("Error", "There was an error picking the image.");
+      console.error("Error picking image:", error);
+      Alert.alert("Error", "There was a problem selecting your image");
     }
   };
+  
+  
 
   const handleSubmit = async () => {
 
