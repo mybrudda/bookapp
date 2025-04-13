@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
     fontFamily: "JetBrainsMono-Medium",
   },
   bookImageContainer: {
-    width: "100%",
+    width: "70%",
+    alignSelf: "center",
     height: 200,
     borderRadius: 12,
     overflow: "hidden",
