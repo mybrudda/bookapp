@@ -6,15 +6,15 @@ This is a cross-platform mobile application built with **React Native (Expo)** t
 
 ## 🚀 Features
 
-- 🔐 **Authentication**
+- 🔐 **Authentication**  
   - User Registration & Login
-- ✍️ **Book Recommendations**
-  - Create a new recommendation
-  - View other users' recommendations
+- ✍️ **Book Recommendations**  
+  - Create a new recommendation  
+  - View other users' recommendations  
   - Manage your own posts
-- 🌐 **Global State Management**
+- 🌐 **Global State Management**  
   - Powered by Zustand for simple and scalable state handling
-- 🛠 **Backend**
+- 🛠 **Backend**  
   - Built with Node.js, Express.js, and MongoDB
 
 ---
@@ -28,7 +28,6 @@ This is a cross-platform mobile application built with **React Native (Expo)** t
   <img src="./mobile/assets/images/ss4.png" width="300px" alt="Create Recommendation" />
   <img src="./mobile/assets/images/ss5.png" width="300px" alt="View Recommendations" />
 </p>
-
 
 ---
 
@@ -45,12 +44,27 @@ This is a cross-platform mobile application built with **React Native (Expo)** t
 
 ---
 
+## 📌 Future Improvements
+
+- 💬 **Commenting System**  
+  Users will be able to add comments to each book recommendation post.
+
+- 🖼 **Image Moderation**  
+  Created posts will have image moderation to ensure content quality and safety.
+
+- 👤 **Profile Editing**  
+  Users will be able to edit their profile details such as username, bio, and profile picture.
+
+- 🌗 **Dark and Light Theme Support**  
+  Add the ability to toggle between dark and light themes.
+
+---
+
 ## 🛠 Setup Instructions
 
 ### 1. Clone the Repository
 
 To test the app on a physical device, make sure you have the **Expo Go** app installed from the [App Store](https://apps.apple.com/app/expo-go/id982107779) or [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent). Once the Expo development server is running (`npx expo start`), scan the QR code with Expo Go to launch the app on your phone.
-
 
 ```bash
 git clone https://github.com/mybrudda/bookapp.git
