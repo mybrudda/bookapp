@@ -8,12 +8,18 @@ This is a cross-platform mobile application built with **React Native (Expo)** t
 
 - 🔐 **Authentication**  
   - User Registration & Login
+
 - ✍️ **Book Recommendations**  
   - Create a new recommendation  
   - View other users' recommendations  
   - Manage your own posts
+
+- 🖼 **Image Moderation**  
+  - Uploaded images are moderated to ensure content quality and safety
+
 - 🌐 **Global State Management**  
   - Powered by Zustand for simple and scalable state handling
+
 - 🛠 **Backend**  
   - Built with Node.js, Express.js, and MongoDB
 
@@ -48,9 +54,6 @@ This is a cross-platform mobile application built with **React Native (Expo)** t
 
 - 💬 **Commenting System**  
   Users will be able to add comments to each book recommendation post.
-
-- 🖼 **Image Moderation**  
-  Created posts will have image moderation to ensure content quality and safety.
 
 - 👤 **Profile Editing**  
   Users will be able to edit their profile details such as username, bio, and profile picture.
