@@ -13,11 +13,25 @@ router.post("/", protectRoute, async (req, res) => {
       return res.status(400).json({ message: "Please provide all fields" });
     }
 
-    // upload the image to cloudinary
-    const uploadResponse = await cloudinary.uploader.upload(image);
-    const imageURL = uploadResponse.secure_url;
+    // Upload the image to Cloudinary with moderation enabled
+    const uploadResponse = await cloudinary.uploader.upload(image, {
+      moderation: "aws_rek",
+    });
 
-    // save to the DB
+    // Check if moderation results exist and were rejected
+    const moderationResult = uploadResponse.moderation?.[0];
+    const isRejected = moderationResult?.status === "rejected";
+    const labels = moderationResult?.response?.moderation_labels || [];
+
+    if (isRejected) {
+      return res.status(400).json({
+        message: "Image failed moderation. Please upload a different image.",
+        labels: labels.map(label => label.name),
+      });
+    }
+
+   
+    const imageURL = uploadResponse.secure_url;
     const newBook = new Book({
       title,
       caption,
